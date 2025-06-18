@@ -1,0 +1,23 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python -m src.data.data_ingestion
+    deps:
+    - path: src/data/data_ingestion.py
+      hash: md5
+      md5: 5a32ca6b5f474bd60bde23ece5ad10e8
+      size: 10589
+    params:
+      params.yaml:
+        data_ingestion.exclude_files:
+        - gender_submission.csv
+        data_ingestion.kaggle_competition: titanic
+    outs:
+    - path: data/raw/test.csv
+      hash: md5
+      md5: 7533b82eae4b582610cbd68aa636b017
+      size: 28629
+    - path: data/raw/train.csv
+      hash: md5
+      md5: 2309cc5f04782ed9bb6016d9f4e381cf
+      size: 61194

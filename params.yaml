@@ -1,0 +1,3 @@
+data_ingestion:
+  kaggle_competition: titanic
+  exclude_files: ["gender_submission.csv"]
