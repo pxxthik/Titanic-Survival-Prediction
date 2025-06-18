@@ -12,6 +12,7 @@ import src.utils as utils
 # logging configure
 logger = utils.configure_logger(__name__, log_file="data_ingestion.log")
 
+
 class KaggleDataIngestion:
     """A class to handle Kaggle data ingestion with proper error handling."""
 
@@ -26,7 +27,8 @@ class KaggleDataIngestion:
             bool: True if setup successful, False otherwise
         """
         try:
-            # Load .env if running locally (ignored in CI if env vars already set)
+            # Load .env if running locally (ignored in CI if env vars already
+            # set)
             load_dotenv()
 
             username = os.getenv("KAGGLE_USERNAME")
@@ -95,10 +97,12 @@ class KaggleDataIngestion:
             return True
 
         except OSError as e:
-            logger.error(f"Failed to create output directory {output_dir}: {e}")
+            logger.error(
+                f"Failed to create output directory {output_dir}: {e}")
             return False
         except Exception as e:
-            logger.error(f"Unexpected error creating directory {output_dir}: {e}")
+            logger.error(
+                f"Unexpected error creating directory {output_dir}: {e}")
             return False
 
     def download_competition_files(
@@ -116,23 +120,28 @@ class KaggleDataIngestion:
         """
         try:
             if not self.api:
-                logger.error("API not authenticated. Call authenticate_api() first.")
+                logger.error(
+                    "API not authenticated. Call authenticate_api() first.")
                 return False
 
             zip_path = Path(output_dir) / f"{competition_name}.zip"
 
-            logger.info(f"Downloading competition '{competition_name}' to {output_dir}")
-            self.api.competition_download_files(competition_name, path=output_dir)
+            logger.info(
+                f"Downloading competition '{competition_name}' to {output_dir}")
+            self.api.competition_download_files(
+                competition_name, path=output_dir)
 
             if not zip_path.exists():
                 logger.error(f"Downloaded zip file not found: {zip_path}")
                 return False
 
-            logger.info(f"Competition files downloaded successfully: {zip_path}")
+            logger.info(
+                f"Competition files downloaded successfully: {zip_path}")
             return True
 
         except Exception as e:
-            logger.error(f"Failed to download competition '{competition_name}': {e}")
+            logger.error(
+                f"Failed to download competition '{competition_name}': {e}")
             return False
 
     def extract_zip_file(
@@ -221,7 +230,8 @@ class KaggleDataIngestion:
             bool: True if entire process successful, False otherwise
         """
         try:
-            logger.info(f"Starting data ingestion for competition: {competition_name}")
+            logger.info(
+                f"Starting data ingestion for competition: {competition_name}")
 
             # Step 1: Setup credentials
             if not self.setup_kaggle_credentials():
@@ -235,26 +245,32 @@ class KaggleDataIngestion:
 
             # Step 3: Create output directory
             if not self.create_output_directory(output_dir):
-                logger.error(f"Failed to create output directory: {output_dir}")
+                logger.error(
+                    f"Failed to create output directory: {output_dir}")
                 return False
 
             # Step 4: Download competition files
-            if not self.download_competition_files(competition_name, output_dir):
+            if not self.download_competition_files(
+                    competition_name, output_dir):
                 logger.error(
                     f"Failed to download competition files: {competition_name}"
                 )
                 return False
 
             # Step 5: Extract zip file (excluding specified files)
-            if not self.extract_zip_file(competition_name, output_dir, exclude_files):
-                logger.error(f"Failed to extract competition files: {competition_name}")
+            if not self.extract_zip_file(
+                    competition_name, output_dir, exclude_files):
+                logger.error(
+                    f"Failed to extract competition files: {competition_name}")
                 return False
 
-            logger.info(f"Data ingestion completed successfully for {competition_name}")
+            logger.info(
+                f"Data ingestion completed successfully for {competition_name}")
             return True
 
         except Exception as e:
-            logger.error(f"Unexpected error in download_and_extract_competition: {e}")
+            logger.error(
+                f"Unexpected error in download_and_extract_competition: {e}")
             return False
 
 
@@ -267,11 +283,12 @@ def main():
         )
         if not params:
             raise ValueError("Params not found")
-        
+
         # Initialize the data ingestion class
         ingestion = KaggleDataIngestion()
 
-        # Download and extract Titanic competition data (excluding submission.csv)
+        # Download and extract Titanic competition data (excluding
+        # submission.csv)
         competition_name = params["kaggle_competition"]
         output_dir = "data/raw"
         exclude_files = params["exclude_files"]  # Common submission file name

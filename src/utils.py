@@ -50,8 +50,10 @@ def configure_logger(
 
 
 def save_data(
-    train_data: pd.DataFrame, test_data: pd.DataFrame, data_path: str, logger: logging
-) -> None:
+        train_data: pd.DataFrame,
+        test_data: pd.DataFrame,
+        data_path: str,
+        logger: logging) -> None:
     try:
         logger.debug("Saving Data")
         os.makedirs(data_path, exist_ok=True)
