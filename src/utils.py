@@ -50,16 +50,15 @@ def configure_logger(
 
 
 def save_data(
-        train_data: pd.DataFrame,
-        test_data: pd.DataFrame,
+        data: pd.DataFrame,
+        file_name: str,
         data_path: str,
         logger: logging) -> None:
     try:
         logger.debug("Saving Data")
         os.makedirs(data_path, exist_ok=True)
 
-        train_data.to_csv(os.path.join(data_path, "train.csv"), index=False)
-        test_data.to_csv(os.path.join(data_path, "test.csv"), index=False)
+        data.to_csv(os.path.join(data_path, file_name), index=False)
         logger.info("Data saved successfully")
     except Exception as e:
         logger.error(f"Error saving data: {e}")

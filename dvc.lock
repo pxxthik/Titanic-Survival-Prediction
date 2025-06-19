@@ -7,6 +7,10 @@ stages:
       hash: md5
       md5: 4fb2391aaec0a581ac885d85e40087fb
       size: 10881
+    - path: src/utils.py
+      hash: md5
+      md5: 013c8749ec5a5405633be4a2fc8ccccb
+      size: 1820
     params:
       params.yaml:
         data_ingestion.exclude_files:
@@ -21,3 +25,19 @@ stages:
       hash: md5
       md5: 2309cc5f04782ed9bb6016d9f4e381cf
       size: 61194
+  data_preprocessing:
+    cmd: python -m src.data.data_preprocessing
+    deps:
+    - path: src/data/data_preprocessing.py
+      hash: md5
+      md5: 57df36579753b40d9a32e4fb3bdf2ab1
+      size: 1606
+    - path: src/utils.py
+      hash: md5
+      md5: 013c8749ec5a5405633be4a2fc8ccccb
+      size: 1820
+    outs:
+    - path: data/interim/titanic_cleaned.csv
+      hash: md5
+      md5: 31f66f8b7b48955ec5cefb15eb20f894
+      size: 51594

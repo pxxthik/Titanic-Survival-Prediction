@@ -3,9 +3,18 @@ stages:
     cmd: python -m src.data.data_ingestion
     deps:
     - src/data/data_ingestion.py
+    - src/utils.py
     params:
     - data_ingestion.kaggle_competition
     - data_ingestion.exclude_files
     outs:
     - data/raw/train.csv
     - data/raw/test.csv
+  
+  data_preprocessing:
+    cmd: python -m src.data.data_preprocessing
+    deps:
+    - src/data/data_preprocessing.py
+    - src/utils.py
+    outs:
+    - data/interim/titanic_cleaned.csv
