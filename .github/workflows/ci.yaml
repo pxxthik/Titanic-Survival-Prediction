@@ -23,6 +23,10 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run DVC Pipeline
+        env:
+          KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
+          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+          DAGSHUB_PAT: ${{ secrets.DAGSHUB_PAT }}
         run: dvc repro
 
   Linting:
@@ -31,10 +35,10 @@ jobs:
 
     steps:
       - name: Code Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v2
         with:
           python-version: '3.10'
 
