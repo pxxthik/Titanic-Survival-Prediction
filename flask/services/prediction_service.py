@@ -1,6 +1,5 @@
 from helper import encode_sex, encode_embarked, encode_title, bin_fare, bin_age, is_alone
 from services.model_loader import load_model
-import os
 
 # Constants (could also be loaded from .env)
 MODEL_NAME = "Titanic Survival Predictor"
@@ -10,6 +9,7 @@ REPO_NAME = "Titanic-Survival-Prediction"
 
 # Load model once at import
 model = load_model(MODEL_NAME, DAGSHUB_URL, REPO_OWNER, REPO_NAME)
+
 
 def transform_input(request):
     pclass = int(request.form['pclass'])
@@ -24,6 +24,7 @@ def transform_input(request):
     isAlone = is_alone(familysize)
 
     return [pclass, sex, age, fare, embarked, familysize, isAlone, title, fareBin, ageBin]
+
 
 def get_prediction(input_data):
     return model.predict([input_data])[0]
