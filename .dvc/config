@@ -1,0 +1,8 @@
+[core]
+    remote = dagshub-remote
+['remote "dagshub-remote"']
+    url = s3://Titanic-Survival-Prediction
+    endpointurl = https://dagshub.com/api/v1/repo-buckets/s3/pxxthik
+    region = us-east-1
+    access_key_id = b30ba07c5b3fe8655b8b7b94dea37ee76e49e5db
+    secret_access_key = b30ba07c5b3fe8655b8b7b94dea37ee76e49e5db
