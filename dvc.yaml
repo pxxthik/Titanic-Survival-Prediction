@@ -62,3 +62,13 @@ stages:
     - model_building.n_estimators
     outs:
     - models/model.pkl
+
+  model_evaluation:
+    cmd: python -m src.models.model_evaluation
+    deps:
+      - src/models/model_evaluation.py
+      - models/model.pkl
+      - data/processed/validation.csv
+    outs:
+      - reports/metrics.json
+      - reports/run_info.json
