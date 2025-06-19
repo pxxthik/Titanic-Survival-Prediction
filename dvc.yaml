@@ -37,3 +37,15 @@ stages:
     - data/interim/feature_engineering.csv
     outs:
     - data/processed/features.csv
+  
+  split_data:
+    cmd: python -m src.features.split_data
+    deps:
+      - src/features/split_data.py
+      - data/processed/features.csv
+    params:
+    - split_data.test_size
+    - split_data.random_state
+    outs:
+      - data/processed/train.csv
+      - data/processed/validation.csv
