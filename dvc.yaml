@@ -16,5 +16,15 @@ stages:
     deps:
     - src/data/data_preprocessing.py
     - src/utils.py
+    - data/raw
     outs:
     - data/interim/titanic_cleaned.csv
+  
+  feature_engineering:
+    cmd: python -m src.features.feature_engineering
+    deps:
+    - src/features/feature_engineering.py
+    - src/utils.py
+    - data/interim/titanic_cleaned.csv
+    outs:
+    - data/interim/feature_engineering.csv

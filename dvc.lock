@@ -28,6 +28,11 @@ stages:
   data_preprocessing:
     cmd: python -m src.data.data_preprocessing
     deps:
+    - path: data/raw
+      hash: md5
+      md5: c5f612fdfe06b317e4101c4b035c692c.dir
+      size: 89823
+      nfiles: 2
     - path: src/data/data_preprocessing.py
       hash: md5
       md5: 57df36579753b40d9a32e4fb3bdf2ab1
@@ -41,3 +46,23 @@ stages:
       hash: md5
       md5: 31f66f8b7b48955ec5cefb15eb20f894
       size: 51594
+  feature_engineering:
+    cmd: python -m src.features.feature_engineering
+    deps:
+    - path: data/interim/titanic_cleaned.csv
+      hash: md5
+      md5: 31f66f8b7b48955ec5cefb15eb20f894
+      size: 51594
+    - path: src/features/feature_engineering.py
+      hash: md5
+      md5: 2cd15f007c352d4e9fdc607109fe1d33
+      size: 1730
+    - path: src/utils.py
+      hash: md5
+      md5: 013c8749ec5a5405633be4a2fc8ccccb
+      size: 1820
+    outs:
+    - path: data/interim/feature_engineering.csv
+      hash: md5
+      md5: 8304be280de8fa17c2f1bcd802ff224f
+      size: 87415
