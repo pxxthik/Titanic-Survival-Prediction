@@ -5,3 +5,8 @@ data_ingestion:
 split_data:
   test_size: 0.2
   random_state: 42
+
+model_building:
+  max_depth: 5
+  min_samples_split: 2
+  n_estimators: 100

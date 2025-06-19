@@ -41,11 +41,24 @@ stages:
   split_data:
     cmd: python -m src.features.split_data
     deps:
-      - src/features/split_data.py
-      - data/processed/features.csv
+    - src/features/split_data.py
+    - data/processed/features.csv
     params:
     - split_data.test_size
     - split_data.random_state
     outs:
-      - data/processed/train.csv
-      - data/processed/validation.csv
+    - data/processed/train.csv
+    - data/processed/validation.csv
+
+  model_building:
+    cmd: python -m src.models.model_building
+    deps:
+    - src/models/model_building.py
+    - src/utils.py
+    - data/processed/train.csv
+    params:
+    - model_building.max_depth
+    - model_building.min_samples_split
+    - model_building.n_estimators
+    outs:
+    - models/model.pkl
