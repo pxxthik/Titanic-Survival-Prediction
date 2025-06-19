@@ -55,8 +55,8 @@ stages:
       size: 51594
     - path: src/features/feature_engineering.py
       hash: md5
-      md5: 2cd15f007c352d4e9fdc607109fe1d33
-      size: 1730
+      md5: 1d984e36b7e9b587ede3f6bf3cd93661
+      size: 1732
     - path: src/utils.py
       hash: md5
       md5: 013c8749ec5a5405633be4a2fc8ccccb
@@ -66,3 +66,23 @@ stages:
       hash: md5
       md5: 8304be280de8fa17c2f1bcd802ff224f
       size: 87415
+  feature_encoding:
+    cmd: python -m src.features.feature_encoding
+    deps:
+    - path: data/interim/feature_engineering.csv
+      hash: md5
+      md5: 8304be280de8fa17c2f1bcd802ff224f
+      size: 87415
+    - path: src/features/feature_encoding.py
+      hash: md5
+      md5: 15a38d2cb068a5ec0dd659c9caa352ba
+      size: 1938
+    - path: src/utils.py
+      hash: md5
+      md5: 013c8749ec5a5405633be4a2fc8ccccb
+      size: 1820
+    outs:
+    - path: data/processed/features.csv
+      hash: md5
+      md5: 578dddcefacd49f14f035aa2420d06d7
+      size: 26864

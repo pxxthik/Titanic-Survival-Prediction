@@ -28,3 +28,12 @@ stages:
     - data/interim/titanic_cleaned.csv
     outs:
     - data/interim/feature_engineering.csv
+  
+  feature_encoding:
+    cmd: python -m src.features.feature_encoding
+    deps:
+    - src/features/feature_encoding.py
+    - src/utils.py
+    - data/interim/feature_engineering.csv
+    outs:
+    - data/processed/features.csv
