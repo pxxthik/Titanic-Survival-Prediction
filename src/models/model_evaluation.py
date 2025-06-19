@@ -1,14 +1,12 @@
 import os
 import json
 import pickle
-import numpy as np
 import pandas as pd
 
 from sklearn.metrics import accuracy_score, precision_score, recall_score, roc_auc_score
 
 import mlflow
 import mlflow.sklearn
-import dagshub
 from dotenv import load_dotenv
 
 import src.utils as utils
