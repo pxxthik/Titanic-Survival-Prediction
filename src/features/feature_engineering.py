@@ -38,6 +38,7 @@ def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
         logger.error(f"Error during feature engineering: {e}")
         return df
 
+
 def main():
     df = load_data()
     if df.empty:
