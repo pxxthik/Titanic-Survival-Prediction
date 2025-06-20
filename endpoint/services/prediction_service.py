@@ -1,5 +1,5 @@
-from helper import encode_sex, encode_embarked, encode_title, bin_fare, bin_age, is_alone
-from services.model_loader import load_model
+from endpoint.helper import encode_sex, encode_embarked, encode_title, bin_fare, bin_age, is_alone
+from endpoint.services.model_loader import load_model
 
 # Constants (could also be loaded from .env)
 MODEL_NAME = "Titanic Survival Predictor"

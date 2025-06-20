@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-from services.prediction_service import transform_input, get_prediction
+from endpoint.services.prediction_service import transform_input, get_prediction
 
 main_blueprint = Blueprint('main', __name__)
 

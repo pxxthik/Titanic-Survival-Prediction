@@ -2,7 +2,7 @@ from flask import Flask
 from dotenv import load_dotenv
 import os
 
-from routes.main_routes import main_blueprint
+from endpoint.routes.main_routes import main_blueprint
 
 load_dotenv()
 
