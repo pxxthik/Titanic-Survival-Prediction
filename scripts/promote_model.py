@@ -2,6 +2,7 @@ import os
 import mlflow
 from dotenv import load_dotenv
 
+
 def promote_model():
     load_dotenv()
     # Set up DagsHub credentials for MLflow tracking
