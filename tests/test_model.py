@@ -2,6 +2,7 @@ import unittest
 import mlflow
 import os
 import pandas as pd
+from sklearn.metrics import accuracy_score, precision_score, recall_score
 from dotenv import load_dotenv
 
 
@@ -45,7 +46,7 @@ class TestModelLoading(unittest.TestCase):
 
     def test_model_signature(self):
         # Create a dummy input for the model based on expected input shape
-        input_text = [3,1,16.0,18.0,2,3,1,3,1,0]
+        input_text = [3, 1, 16.0, 18.0, 2, 3, 1, 3, 1, 0]
         input_df = pd.DataFrame([input_text])
 
         # Predict using the new model to verify the input and output shapes
@@ -56,4 +57,41 @@ class TestModelLoading(unittest.TestCase):
 
         # Verify the output shape (assuming binary classification with a single output)
         self.assertEqual(len(prediction), input_df.shape[0])
-        self.assertEqual(len(prediction.shape), 1)  # Assuming a single output column for binary classification
+        # Assuming a single output column for binary classification
+        self.assertEqual(len(prediction.shape), 1)
+
+    def test_model_performance(self):
+        # Extract features and labels from holdout test data
+        X_holdout = self.holdout_data.iloc[:, 0:-1]
+        y_holdout = self.holdout_data.iloc[:, -1]
+
+        # Predict using the new model
+        y_pred_new = self.new_model.predict(X_holdout)
+
+        # Calculate performance metrics for the new model
+        accuracy_new = accuracy_score(y_holdout, y_pred_new)
+        precision_new = precision_score(y_holdout, y_pred_new)
+        recall_new = recall_score(y_holdout, y_pred_new)
+
+        # Define expected thresholds for the performance metrics
+        expected_accuracy = 0.4
+        expected_precision = 0.4
+        expected_recall = 0.4
+
+        # Assert that the new model meets the performance thresholds
+        self.assertGreaterEqual(
+            accuracy_new,
+            expected_accuracy,
+            f'Accuracy should be at least {expected_accuracy}')
+        self.assertGreaterEqual(
+            precision_new,
+            expected_precision,
+            f'Precision should be at least {expected_precision}')
+        self.assertGreaterEqual(
+            recall_new,
+            expected_recall,
+            f'Recall should be at least {expected_recall}')
+
+
+if __name__ == "__main__":
+    unittest.main()
