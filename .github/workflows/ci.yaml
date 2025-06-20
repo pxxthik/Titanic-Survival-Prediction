@@ -36,7 +36,14 @@ jobs:
           KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
           DAGSHUB_PAT: ${{ secrets.DAGSHUB_PAT }}
         run: dvc repro
-      
+  
+  Testing:
+    name: Model Testing
+    runs-on: ubuntu-latest
+
+    needs: [DVC_Pipeline]
+
+    steps:
       - name: Run model tests
         env:
           DAGSHUB_PAT: ${{ secrets.DAGSHUB_PAT }}

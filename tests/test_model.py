@@ -42,3 +42,18 @@ class TestModelLoading(unittest.TestCase):
 
     def test_model_loaded_properly(self):
         self.assertIsNotNone(self.new_model)
+
+    def test_model_signature(self):
+        # Create a dummy input for the model based on expected input shape
+        input_text = [3,1,16.0,18.0,2,3,1,3,1,0]
+        input_df = pd.DataFrame([input_text])
+
+        # Predict using the new model to verify the input and output shapes
+        prediction = self.new_model.predict(input_df)
+
+        # Verify the input shape
+        self.assertEqual(input_df.shape[1], 10)
+
+        # Verify the output shape (assuming binary classification with a single output)
+        self.assertEqual(len(prediction), input_df.shape[0])
+        self.assertEqual(len(prediction.shape), 1)  # Assuming a single output column for binary classification
