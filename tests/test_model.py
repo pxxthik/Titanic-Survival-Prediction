@@ -62,8 +62,8 @@ class TestModelLoading(unittest.TestCase):
 
     def test_model_performance(self):
         # Extract features and labels from holdout test data
-        X_holdout = self.holdout_data.iloc[:, 0:-1]
-        y_holdout = self.holdout_data.iloc[:, -1]
+        X_holdout = self.holdout_data.drop("Survived", axis=1)
+        y_holdout = self.holdout_data["Survived"]
 
         # Predict using the new model
         y_pred_new = self.new_model.predict(X_holdout)
