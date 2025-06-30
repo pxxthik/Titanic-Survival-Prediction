@@ -65,7 +65,7 @@ jobs:
       - name: Build docker image
         if: success()
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }} pxxthik/titanic2:latest .
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/titanic2:latest .
       
       - name: Push docker image
         if: success()
