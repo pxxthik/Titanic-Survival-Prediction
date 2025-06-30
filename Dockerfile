@@ -14,4 +14,4 @@ RUN pip install -r endpoint/requirements.txt
 EXPOSE 5000
 
 # Run app.py at container launch
-CMD ["python", "-m", "endpoint.app"]
+CMD ["gunicorn", "endpoint.app:app", "--bind", "0.0.0.0:5000"]
